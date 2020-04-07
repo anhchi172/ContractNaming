@@ -14,5 +14,8 @@ public class Contract {
         return piid;
     }
 
-
+    @Override
+    public String toString() {
+        return ("Piid: " + piid + " Name: " + name);
+    }
 }

@@ -1,4 +1,4 @@
-import java.io.FileReader;
+/*import java.io.FileReader;
 
 public class readCSVFile {
     public static void readData(String file)
@@ -15,3 +15,4 @@ public class readCSVFile {
         }
     }
 }
+*/
