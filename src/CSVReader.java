@@ -51,6 +51,9 @@ public class CSVReader {
         int piid = Integer.parseInt(metadata[0]);
         String name = metadata[1];
         String dateSigned = metadata[3];
-        return new Contract(piid, name, dateSigned);
+         Contract c = new Contract(piid, name, dateSigned);
+         c.setNameAcronym(name);
+         return c;
+
     }
 }
