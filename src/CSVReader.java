@@ -7,44 +7,50 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static java.nio.charset.Charset.*;
 
 public class CSVReader {
     public static void main(String[] args) {
-        List<Contract> contracts;
-        contracts = readContractsFromCSV("C:\\Users\\Chi Hoang\\AppData\\Local\\Packages\\microsoft.windowscommunicationsapps_8wekyb3d8bbwe\\LocalState\\Files\\S0\\1782\\Attachments\\IDV 2.xlsx");
+
+        List<ContractList> contracts = (List<ContractList>) readContractsFromCSV("C:\\Users\\Chi Hoang\\AppData\\Local\\Packages\\microsoft.windowscommunicationsapps_8wekyb3d8bbwe\\LocalState\\Files\\S0\\1782\\Attachments\\IDV 2.xlsx");
         //Debug print later can update to enter in portal
-        for (Contract c : contracts) {
-            System.out.print(c.toString());
+        for (ContractList cl : contracts) {
+            System.out.print(cl.toString());
         }
 
     }
 
-    private static List<Contract> readContractsFromCSV(String fileName) {
-        List<Contract> contracts = new ArrayList<>();
+    private static List<ContractList> readContractsFromCSV(String fileName) {
+        List<ContractList> allContracts = new ArrayList<ContractList>();
         Path filePath = Paths.get(fileName);
-        try (BufferedReader br = Files.newBufferedReader(filePath, lookupViaProviders("ISO-8859-1"))) {
+        try (BufferedReader br = Files.newBufferedReader(filePath, "ISO-8859-1")) {
             String line;
             line = br.readLine();
             while (line != null) {
+                ContractList current = new ContractList();
                 String[] attributes = line.split(",");
                 Contract contract = createContract(attributes);
-                contracts.add(contract);
-                line = br.readLine();
+                while (current.isGrouped()== true) {
+                    current.group(contract);
+                    line = br.readLine();
+                }
+                allContracts.add(current);
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (MalformedInputException m){
-
+            m.printStackTrace();
         }
-        return contracts;
+        return allContracts;
     }
 
     private static Contract createContract(String[] metadata){
         int piid = Integer.parseInt(metadata[0]);
         String name = metadata[1];
-        return new Contract(piid, name);
+        String dateSigned = metadata[3];
+        return new Contract(piid, name, dateSigned);
     }
 }
