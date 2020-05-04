@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.opencsv:opencsv:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/opencsv/opencsv/unknown/opencsv-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/opencsv/opencsv/unknown/opencsv-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/opencsv/opencsv/unknown/opencsv-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
